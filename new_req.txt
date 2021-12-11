@@ -1,0 +1,5 @@
+pandas
+tensorflow-addons
+tqdm
+pytest
+tensorflow-datasets

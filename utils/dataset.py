@@ -13,6 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 
+from typing import Sized
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -67,9 +68,18 @@ class Dataset(object):
 
 
     def get_dataset(self):
-        if self.model_name == 'MNIST':
+        if self.model_name == 'MHD':
             (self.X_train, self.y_train), (self.X_test, self.y_test) = tf.keras.datasets.mnist.load_data(path=self.config['mnist_path'])
             # prepare the data
+            self.X_train, self.y_train = pre_process_mnist.pre_process(self.X_train, self.y_train)
+            self.X_test, self.y_test = pre_process_mnist.pre_process(self.X_test, self.y_test)
+            self.class_names = list(range(10))
+            print("[INFO] Dataset loaded!")
+        elif self.model_name == 'MNIST':
+            (self.X_train, self.y_train), (self.X_test, self.y_test) = tf.keras.datasets.mnist.load_data(path=self.config['mnist_path'])
+            # prepare the data
+            print(self.X_train.shape)
+            print(self.y_train.shape)
             self.X_train, self.y_train = pre_process_mnist.pre_process(self.X_train, self.y_train)
             self.X_test, self.y_test = pre_process_mnist.pre_process(self.X_test, self.y_test)
             self.class_names = list(range(10))
