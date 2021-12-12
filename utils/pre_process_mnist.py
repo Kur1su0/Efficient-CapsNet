@@ -20,14 +20,14 @@ import cv2
 tf2 = tf.compat.v2
 
 # constants
-MNIST_IMG_SIZE = 28
+MNIST_IMG_SIZE = 128
 # MNIST_TRAIN_IMAGE_COUNT = 60000
 MNIST_TRAIN_IMAGE_COUNT = 378
 PARALLEL_INPUT_CALLS = 16
 
 # normalize dataset
 def pre_process(image, label):
-    return (image / 256)[...,None].astype('float32'), tf.keras.utils.to_categorical(label, num_classes=10)
+    return (image / 256)[...,None].astype('float32'), tf.keras.utils.to_categorical(label, num_classes=2)
 
 def image_shift_rand(image, label):
     image = tf.reshape(image, [MNIST_IMG_SIZE, MNIST_IMG_SIZE])

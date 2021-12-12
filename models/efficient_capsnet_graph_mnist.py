@@ -27,6 +27,7 @@ def efficient_capsnet_graph(input_shape):
     input_shape: list
         network input shape
     """
+    print(input_shape)
     inputs = tf.keras.Input(input_shape)
     
     x = tf.keras.layers.Conv2D(32,5,activation="relu", padding='valid', kernel_initializer='he_normal')(inputs)
@@ -37,9 +38,10 @@ def efficient_capsnet_graph(input_shape):
     x = tf.keras.layers.BatchNormalization()(x)
     x = tf.keras.layers.Conv2D(128,3,2, activation='relu', padding='valid', kernel_initializer='he_normal')(x)   
     x = tf.keras.layers.BatchNormalization()(x)
-    x = PrimaryCaps(128, 9, 16, 8)(x)
+    x = PrimaryCaps(128, 9, -1, 8)(x)
     
-    digit_caps = FCCaps(10,16)(x)
+    #digit_caps = FCCaps(2,16)(x)
+    digit_caps = FCCaps(2,16)(x)
     
     digit_caps_len = Length(name='length_capsnet_output')(digit_caps)
 
@@ -55,7 +57,7 @@ def generator_graph(input_shape):
     input_shape: list
         network input shape
     """
-    inputs = tf.keras.Input(16*10)
+    inputs = tf.keras.Input(16*2)
     
     x = tf.keras.layers.Dense(512, activation='relu', kernel_initializer='he_normal')(inputs)
     x = tf.keras.layers.Dense(1024, activation='relu', kernel_initializer='he_normal')(x)
@@ -78,8 +80,8 @@ def build_graph(input_shape, mode, verbose):
     verbose: bool
     """
     inputs = tf.keras.Input(input_shape)
-    y_true = tf.keras.layers.Input(shape=(10,))
-    noise = tf.keras.layers.Input(shape=(10, 16))
+    y_true = tf.keras.layers.Input(shape=(2,))
+    noise = tf.keras.layers.Input(shape=(2, 16))
 
     efficient_capsnet = efficient_capsnet_graph(input_shape)
 

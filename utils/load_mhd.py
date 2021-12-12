@@ -43,7 +43,7 @@ def load_all_mhd(disease_mhd_path):
     x = []
     for each_file in disease_mhd_path:
         ret = load_mhd(each_file)
-        ret = cv2.resize(ret, (28,28))
+        ret = cv2.resize(ret, (128,128))
         x.append(ret)
         # plot_mhd(ret)
     return np.array(x)
