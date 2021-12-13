@@ -1,13 +1,5 @@
 ##########################################
 
-Peiyi Yang (py5yy)
-Jerry Yin (jerryyin)
-Zice Wei (zw9ga)
-Yufeng Meng (ym7xb)
-
-
-##########################################
-
 RUN Efficient-CapsNet
 
 Step 1. efficient_capsnet_training.ipynb
