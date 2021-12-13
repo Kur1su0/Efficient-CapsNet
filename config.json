@@ -8,7 +8,7 @@
     "lmd_gen": 0.392,
     "lr_dec": 0.99,
     "batch_size": 16,
-    "epochs":2,
+    "epochs":150,
     "saved_model_dir": "bin",
     "tb_log_save_dir": "logs",
     "mnist_path": "mnist.npz",
